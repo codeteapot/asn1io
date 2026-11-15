@@ -1,0 +1,236 @@
+#ifndef ASN1IO_UNIV_H
+#define ASN1IO_UNIV_H
+
+/*!
+ * \file
+ *
+ * \brief Universal-class tag number constants and \em EOC check operation
+ *
+ * Although its use is optional, it is advisable to ensure alignment with the specification.
+ */
+
+#include <asn1io/tag.h>
+
+namespace asn1 {
+namespace univ {
+
+/*!
+ * \brief End-of-contents
+ *
+ * See section \c 8.1.5 of \c X.690-202102.
+ *
+ * @see is_eoc(tag_header const&, bool)
+ *
+ * \ingroup tag-header-univnums
+ */
+constexpr tag_number tn_eoc = 0;
+
+/*!
+ * \ingroup tag-header-univnums
+ */
+constexpr tag_number tn_boolean = 1;
+
+/*!
+ * \ingroup tag-header-univnums
+ */
+constexpr tag_number tn_integer = 2;
+
+/*!
+ * \ingroup tag-header-univnums
+ */
+constexpr tag_number tn_bit_string = 3;
+
+/*!
+ * \ingroup tag-header-univnums
+ */
+constexpr tag_number tn_octet_string = 4;
+
+/*!
+ * \ingroup tag-header-univnums
+ */
+constexpr tag_number tn_null = 5;
+
+/*!
+ * \ingroup tag-header-univnums
+ */
+constexpr tag_number tn_object_ident = 6;
+
+/*!
+ * \ingroup tag-header-univnums
+ */
+constexpr tag_number tn_object_descr = 7;
+
+/*!
+ * \ingroup tag-header-univnums
+ */
+constexpr tag_number tn_external = 8;
+
+/*!
+ * \ingroup tag-header-univnums
+ */
+constexpr tag_number tn_real = 9;
+
+/*!
+ * \ingroup tag-header-univnums
+ */
+constexpr tag_number tn_enumerated = 10;
+
+/*!
+ * \ingroup tag-header-univnums
+ */
+constexpr tag_number tn_emb_pdv = 11;
+
+/*!
+ * \ingroup tag-header-univnums
+ */
+constexpr tag_number tn_utf8_string = 12;
+
+/*!
+ * \ingroup tag-header-univnums
+ */
+constexpr tag_number tn_reloid = 13;
+
+/*!
+ * \ingroup tag-header-univnums
+ */
+constexpr tag_number tn_time = 14;
+
+/*!
+ * \ingroup tag-header-univnums
+ */
+constexpr tag_number tn_sequence = 16;
+
+/*!
+ * \ingroup tag-header-univnums
+ */
+constexpr tag_number tn_set = 17;
+
+/*!
+ * \ingroup tag-header-univnums
+ */
+constexpr tag_number tn_num_string = 18;
+
+/*!
+ * \ingroup tag-header-univnums
+ */
+constexpr tag_number tn_print_string = 19;
+
+/*!
+ * \ingroup tag-header-univnums
+ */
+constexpr tag_number tn_t61_string = 20;
+
+/*!
+ * \ingroup tag-header-univnums
+ */
+constexpr tag_number tn_vtex_string = 21;
+
+/*!
+ * \ingroup tag-header-univnums
+ */
+constexpr tag_number tn_ia5_string = 22;
+
+/*!
+ * \ingroup tag-header-univnums
+ */
+constexpr tag_number tn_utc_time = 23;
+
+/*!
+ * \ingroup tag-header-univnums
+ */
+constexpr tag_number tn_gen_time = 24;
+
+/*!
+ * \ingroup tag-header-univnums
+ */
+constexpr tag_number tn_graph_string = 25;
+
+/*!
+ * \ingroup tag-header-univnums
+ */
+constexpr tag_number tn_vis_string = 26;
+
+/*!
+ * \ingroup tag-header-univnums
+ */
+constexpr tag_number tn_gen_string = 27;
+
+/*!
+ * \ingroup tag-header-univnums
+ */
+constexpr tag_number tn_univ_string = 28;
+
+/*!
+ * \ingroup tag-header-univnums
+ */
+constexpr tag_number tn_char_string = 29;
+
+/*!
+ * \ingroup tag-header-univnums
+ */
+constexpr tag_number tn_bmp_string = 30;
+
+/*!
+ * \ingroup tag-header-univnums
+ */
+constexpr tag_number tn_date = 31;
+
+/*!
+ * \ingroup tag-header-univnums
+ */
+constexpr tag_number tn_timeofday = 32;
+
+/*!
+ * \ingroup tag-header-univnums
+ */
+constexpr tag_number tn_datetime = 33;
+
+/*!
+ * \ingroup tag-header-univnums
+ */
+constexpr tag_number tn_duration = 34;
+
+/*!
+ * \ingroup tag-header-univnums
+ */
+constexpr tag_number tn_oidiri = 35;
+
+/*!
+ * \ingroup tag-header-univnums
+ */
+constexpr tag_number tn_reloidiri = 36;
+
+/*!
+ * \brief Determine if the tag header is a universal <i>End-of-contents</i>
+ *
+ * That is, if it is of class asn1::tc_universal, if its shape is asn1::ts_primitive, and if its
+ * number is asn1::univ::tn_eoc.
+ *
+ * The value of \p strict determines whether the \c length field of \p th should be taken into
+ * account.
+ *
+ * The following program
+ * \include is-eoc.cxx
+ *
+ * produces the output
+ * \include is-eoc.out
+ *
+ * \param th      The tag header to be evaluated.
+ * \param strict  \c true if it should be taken into account that the length is zero; \c false if it
+ *                doesn't matter.
+ *
+ * \return \c true if it is <i>End-of-Contents</i>; \c false otherwise.
+ *
+ * \ingroup tag-header
+ */
+inline bool is_eoc(tag_header const& th, bool strict = true) noexcept {
+  return th.tclass == tc_universal
+    and th.number == tn_eoc
+    and th.shape == ts_primitive
+    and (th.length == 0 or not strict);
+}
+
+} // end namespace asn1::univ
+} // end namespace asn1
+
+#endif // ASN1IO_UNIV_H

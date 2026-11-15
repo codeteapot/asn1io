@@ -1,0 +1,9 @@
+/*!
+ * \mainpage
+ *
+ * Input and output on ASN.1-encoded streams.
+ *
+ * Meets the <a
+ * href="https://www.itu.int/rec/dologin_pub.asp?lang=e&id=T-REC-X.690-202102-I!!PDF-E&type=items"
+ * >ITU-T X.690 (02/2021) [PDF]</a> recommendation for _ISO/IEC 8825-1_.
+ */

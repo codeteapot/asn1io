@@ -1,0 +1,38 @@
+/*!
+ * \example tag-decode.cxx
+ *
+ * Demonstrates the use of asn1::tag_decode(asn1::tag_header&, asn1::octet_input&, bool).
+ *
+ * Displays the result of decoding the header of a Base64-encoded tag. Although it is known to be
+ * correctly encoded, the fact that it is not is taken into account, so that it is not displayed in
+ * such a case.
+ *
+ * \example tag-sizeof.cxx
+ *
+ * Demonstrates the use of asn1::tag_sizeof(asn1::tag_header const&).
+ *
+ * Displays the size of a tag header created on the fly.
+ *
+ * \example tag-encode.cxx
+ *
+ * Demonstrates the use of asn1::tag_encode(asn1::tag_header const&, asn1::octet_output&).
+ *
+ * Displays the result of Base64-encoding a tag header created on the fly.
+ *
+ * \example is-eoc.cxx
+ *
+ * Demonstrates the use of asn1::univ::is_eoc(asn1::tag_header const&, bool).
+ *
+ * Displays the result for the six possible cases. Only two of which give a positive result: When it
+ * is universal, zero-numbered, primitive, and zero-length if the evaluation is strict.
+ *
+ * \example delimin-getn.cxx
+ *
+ * Explains the behavior of asn1::delimited_input::getn(unsigned char*, std::size_t).
+ *
+ * First, create a structure for output to standard output that displays the result of a read
+ * operation as a series of octets in hexadecimal format.
+ *
+ * By making use of this, it presents a delimited reading, an incomplete reading, and a reading of
+ * the remainder that is available.
+ */

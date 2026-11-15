@@ -1,0 +1,17 @@
+/*!
+ * \namespace asn1
+ *
+ * \brief ASN.1 I/O Library namespace
+ *
+ * Root namespace that contains all the library definitions.
+ *
+ * \namespace asn1::univ
+ *
+ * \brief Universal class tag definitions
+ *
+ * This is, in essence, the constants corresponding to the first 36 tag numbers (15 is reserved) of
+ * the known types when the tag class is universal.
+ *
+ * It includes the operation that determines whether a tag is the \em EOC, as this depends on the
+ * corresponding tag number constant.
+ */

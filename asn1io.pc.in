@@ -1,0 +1,5 @@
+Name: @PACKAGE_NAME@
+Description: ASN.1 I/O Library
+Version: @PACKAGE_VERSION@
+Cflags:
+Libs: -lasn1io

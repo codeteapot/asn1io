@@ -1,0 +1,82 @@
+name: Documentation
+
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            make \
+            g++ \
+            autoconf \
+            automake \
+            libtool \
+            autoconf-archive \
+            dejagnu \
+            doxygen \
+            graphviz \
+            dot2tex
+
+      - name: Configure
+        run: |
+          autoreconf --install
+          ./configure --disable-doxygen-pdf
+
+      - name: Run tests
+        run: make check
+
+      - name: Generate documentation
+        run: |
+          test -f doc/cppreference-doxygen-web.tag.xml
+          make doxygen-doc
+
+      - name: Prepare GitHub Pages
+        run: |
+          test -f doc/output/html/index.html
+          mkdir -p _site/manual
+          cp -a doc/output/html/. _site/manual/
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    runs-on: ubuntu-24.04
+    needs: build
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}manual/
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
