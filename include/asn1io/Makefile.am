@@ -8,8 +8,7 @@ includeasn1io_HEADERS = \
   deliminput.h \
   io.h \
   tag.h \
-  types.h \
-  univ.h
+  types.h
   
 includeasn1iotypes_HEADERS = \
   types/bitstring.h \

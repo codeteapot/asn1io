@@ -9,6 +9,66 @@
 using namespace asn1;
 using namespace std;
 
+void test_iseoc(TestState& test) {
+  bool b = is_eoc({ tc_universal, 0, ts_primitive, 0 });
+  
+  if (not b) {
+    test.fail("Is EOC: Bad result");
+    return;
+  }
+  test.pass("Is EOC: Passed");
+}
+
+void test_iseoc_no_universal(TestState& test) {
+  bool b = is_eoc({ tc_private, 0, ts_primitive, 0 });
+  
+  if (b) {
+    test.fail("Is EOC no UNIVERSAL: Bad result");
+    return;
+  }
+  test.pass("Is EOC no UNIVERSAL: Passed");
+}
+
+void test_iseoc_no_zero_number(TestState& test) {
+  bool b = is_eoc({ tc_universal, 1, ts_primitive, 0 });
+  
+  if (b) {
+    test.fail("Is EOC no zero number: Bad result");
+    return;
+  }
+  test.pass("Is EOC no zero number: Passed");
+}
+
+void test_iseoc_no_primitive(TestState& test) {
+  bool b = is_eoc({ tc_universal, 0, ts_constructed_definite, 0 });
+  
+  if (b) {
+    test.fail("Is EOC no primitive: Bad result");
+    return;
+  }
+  test.pass("Is EOC no primitive: Passed");
+}
+
+void test_iseoc_no_zero_length(TestState& test) {
+  bool b = is_eoc({ tc_universal, 0, ts_primitive, 20 });
+  
+  if (b) {
+    test.fail("Is EOC no zero length: Bad result");
+    return;
+  }
+  test.pass("Is EOC no zero length: Passed");
+}
+
+void test_iseoc_no_strict(TestState& test) {
+  bool b = is_eoc({ tc_universal, 0, ts_primitive, 20 }, false);
+  
+  if (not b) {
+    test.fail("Is EOC no strict: Bad result");
+    return;
+  }
+  test.pass("Is EOC no strict: Passed");
+}
+
 // ASSUMPTION The maximum value of tag_number and size_t fills all the bits
 
 void test_decode_class_universal(TestState& test) {
@@ -1080,6 +1140,13 @@ void test_encode_break_max_long_length(TestState& test) {
 int main() {
   TestState test;
   try {
+    test_iseoc(test);
+    test_iseoc_no_universal(test);
+    test_iseoc_no_zero_number(test);
+    test_iseoc_no_primitive(test);
+    test_iseoc_no_zero_length(test);
+    test_iseoc_no_strict(test);
+    
     test_decode_class_universal(test);
     test_decode_class_application(test);
     test_decode_class_context_specific(test);

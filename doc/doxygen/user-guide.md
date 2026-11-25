@@ -1,5 +1,5 @@
-User guide
-==========
+User guide {#user-guide}
+========================
 
 TODO DOCUMENTATION ...
 

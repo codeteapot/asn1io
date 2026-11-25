@@ -8,6 +8,7 @@ libasn1io_la_LDFLAGS = \
 
 libasn1io_la_SOURCES = \
   deliminput.cxx \
+  iseoc.cxx \
   octet.cxx \
   tagdecode.cxx \
   tagencode.cxx

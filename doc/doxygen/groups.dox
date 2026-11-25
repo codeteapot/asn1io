@@ -15,10 +15,6 @@
  *
  * \defgroup tag-header Tag header
  *
- * \defgroup tag-header-univnums Universal numbers
- *
- * \ingroup tag-header
- *
  * \defgroup builtin-types Built-in types
  *
  * \defgroup builtin-types-boolean Boolean

@@ -21,7 +21,7 @@
  *
  * \example is-eoc.cxx
  *
- * Demonstrates the use of asn1::univ::is_eoc(asn1::tag_header const&, bool).
+ * Demonstrates the use of asn1::is_eoc(asn1::tag_header const&, bool).
  *
  * Displays the result for the six possible cases. Only two of which give a positive result: When it
  * is universal, zero-numbered, primitive, and zero-length if the evaluation is strict.

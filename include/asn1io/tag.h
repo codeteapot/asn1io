@@ -84,14 +84,14 @@ enum tag_shape {
   /*!
    * \brief Constructed with definite length
    *
-   * None of the tags present in the content can satisfy univ::is_eoc(tag_header const&, bool).
+   * None of the tags present in the content can satisfy is_eoc(tag_header const&, bool).
    */
   ts_constructed_definite,
   
   /*!
    * \brief Constructed with indefinite length
    *
-   * The last tag present in the content must satisfy univ::is_eoc(tag_header const&, bool).
+   * The last tag present in the content must satisfy is_eoc(tag_header const&, bool).
    */
   ts_constructed_indefinite
 };
@@ -120,8 +120,8 @@ struct tag_header {
   /*!
    * \brief Value of the number in the tag identifier
    *
-   * It is expected to have one of the values defined in \ref tag-header-univnums when the class is
-   * asn1::tc_universal.
+   * It may refer to the data type it holds or to the field within the structure of which it is a
+   * part.
    */
   tag_number number;
   
@@ -150,6 +150,31 @@ struct tag_header {
    */
   std::size_t length;
 };
+
+/*!
+ * \brief Determine if the tag header is a universal End-of-contents
+ *
+ * That is, if it is of class asn1::tc_universal, if its shape is asn1::ts_primitive, and if its
+ * number zero.
+ *
+ * The value of \p strict determines whether the \c length field of \p th should be taken into
+ * account.
+ *
+ * The following program
+ * \include is-eoc.cxx
+ *
+ * produces the output
+ * \include is-eoc.out
+ *
+ * \param th      The tag header to be evaluated.
+ * \param strict  \c true if it should be taken into account that the length is zero; \c false if it
+ *                doesn't matter.
+ *
+ * \return \c true if it is \em End-of-Contents; \c false otherwise.
+ *
+ * \ingroup tag-header
+ */
+bool is_eoc(tag_header const& th, bool strict = true) noexcept;
 
 /*!
  * \brief Result of decoding a tag

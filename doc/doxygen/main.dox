@@ -3,7 +3,12 @@
  *
  * Input and output on ASN.1-encoded streams.
  *
- * Meets the <a
+ * It meets the following \em ITU-IT recommendations,
+ *
+ * * <a
+ * href="https://www.itu.int/rec/dologin_pub.asp?lang=e&id=T-REC-X.680-202102-I!!PDF-E&type=items"
+ * >X.680 (02/2021) [PDF]</a> -- Abstract Syntax Notation One (ASN.1)
+ * * <a
  * href="https://www.itu.int/rec/dologin_pub.asp?lang=e&id=T-REC-X.690-202102-I!!PDF-E&type=items"
- * >ITU-T X.690 (02/2021) [PDF]</a> recommendation for _ISO/IEC 8825-1_.
+ * >X.690 (02/2021) [PDF]</a> -- ASN.1 encoding rules
  */
